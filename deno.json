@@ -3,7 +3,10 @@
     "dev": "deno run --watch main.ts"
   },
   "imports": {
-    "@std/assert": "jsr:@std/assert@1"
+    "@std/assert": "jsr:@std/assert@1",
+    "@std/uuid": "jsr:@std/uuid@^1.0.9",
+    "@types/random-seed": "npm:@types/random-seed@^0.3.5",
+    "random-seed": "npm:random-seed@^0.3.0"
   },
   "fmt": {
     "lineWidth": 180
