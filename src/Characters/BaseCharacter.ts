@@ -1,13 +1,19 @@
-import { Tags } from "../Tags.ts";
+export const BASE_MAX_HP = 50;
 
 export abstract class BaseCharacter {
-  name: string = "BaseCharacter";
-  movementSpeed: number = 0;
+  abstract name: string;
+  abstract maxHealth: number;
+  abstract baseMovementSpeed: number;
   /**
    * Use for display, to calculate effects use Tags
    */
-  side: CharacterSide = "village";
-  tags: Tags[] = []
+  abstract side: CharacterSide;
+  abstract tags: CharacterTags[];
 }
 
 export type CharacterSide = "village" | "wolf" | "solo";
+
+export type CharacterTags =
+  "isWolf" |
+  "isVillager" |
+  "isSolo"

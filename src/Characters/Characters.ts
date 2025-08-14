@@ -1,0 +1,1 @@
+export { Villager } from "./Villager.ts";
