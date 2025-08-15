@@ -1,0 +1,19 @@
+import { TriggerOnDamage } from "../Interfaces.ts";
+import { Player } from "../Player.ts";
+import { BaseEffect, EffectTag } from "./BaseEffect.ts";
+
+export class RedRidingHoodPassive extends BaseEffect implements TriggerOnDamage {
+  override name: string = "Red riding hood passive protection";
+  override tags: EffectTag[] = ["TriggerOnDamage"];
+
+  OnDamage(source: Player, initialDamage: number): number {
+    let finalDamage = initialDamage;
+    const damageReduction = source.character.tags.includes("isWolf") ? 2 : 1;
+
+    finalDamage = Math.max(0, initialDamage - damageReduction);
+
+    console.log(`${this.name} reduced damage from ${initialDamage} to ${finalDamage} (${finalDamage - initialDamage})`);
+
+    return finalDamage;
+  }
+}

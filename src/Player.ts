@@ -1,7 +1,8 @@
 import { BaseCharacter } from "./Characters/BaseCharacter.ts";
 import { CooldownTimer } from "./CooldownTimer.ts";
 import { BaseEffect } from "./Effects/BaseEffect.ts";
-import { BaseItem, TriggerOnDamage } from "./Items/BaseItem.ts";
+import { TriggerOnDamage } from "./Interfaces.ts";
+import { BaseItem } from "./Items/BaseItem.ts";
 
 export class Player {
   id: string;
@@ -30,12 +31,13 @@ export class Player {
     this.health += finalHeal;
   }
 
-  Damage(source: Player, initialDamage: number) {
+  TakingDamage(source: Player, initialDamage: number) {
     let finalDamage = initialDamage;
 
     console.log(`${this.name} is being damaged by ${source.name} for ${initialDamage} damage`);
 
     this.items.filter(item => item.tags.includes("TriggerOnDamage")).forEach(item => finalDamage = (item as unknown as TriggerOnDamage).OnDamage(source, finalDamage));
+    this.effects.filter(effect => effect.tags.includes("TriggerOnDamage")).forEach(effect => finalDamage = (effect as unknown as TriggerOnDamage).OnDamage(source, finalDamage));
 
     console.log(`${this.name} took ${finalDamage} damages`);
 

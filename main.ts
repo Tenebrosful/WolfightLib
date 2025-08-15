@@ -1,13 +1,15 @@
-import { Villager } from "./src/Characters/Characters.ts";
+import { RedRidingHood, Villager } from "./src/Characters/Characters.ts";
 import { Game } from "./src/Game.ts";
-import { UsableSelf } from "./src/Items/BaseItem.ts";
+import { UsableSelf } from "./src/Interfaces.ts";
 import { HealingPotion, WarRobe } from "./src/Items/Items.ts";
 import { Player } from "./src/Player.ts";
 
 const game = new Game();
 
-game.players.push(new Player(new Villager(), [new WarRobe(), new HealingPotion(), new WarRobe()], "Player 1"));
+game.players.push(new Player(new RedRidingHood(), [new WarRobe(), new HealingPotion(), new WarRobe()], "Player 1"));
 game.players.push(new Player(new Villager(), [new WarRobe(), new HealingPotion(), new WarRobe()], "Player 2"));
+
+game.GameStart();
 
 game.TurnStart();
 
@@ -15,8 +17,10 @@ game.TurnStart();
 
 game.TurnEnd()
 
-game.players[0].Damage(game.players[1], 10);
+game.players[0].TakingDamage(game.players[1], 10);
 
 game.TurnEnd()
 
 game.TurnEnd()
+
+console.log(game);

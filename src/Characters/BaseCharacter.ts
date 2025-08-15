@@ -16,4 +16,5 @@ export type CharacterSide = "village" | "wolf" | "solo";
 export type CharacterTags =
   "isWolf" |
   "isVillager" |
-  "isSolo"
+  "isSolo" |
+  "TriggerOnGameStart"

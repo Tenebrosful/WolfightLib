@@ -1,0 +1,1 @@
+export { RedRidingHoodPassive } from "./RedRidingHoodPassive.ts";

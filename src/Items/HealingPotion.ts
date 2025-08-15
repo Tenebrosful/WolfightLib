@@ -1,5 +1,6 @@
 import { DiceGenerator } from "../DiceGenerator.ts";
-import { BaseItem, ItemTag, UsableSelf } from "./BaseItem.ts";
+import { UsableSelf } from "../Interfaces.ts";
+import { BaseItem, ItemTag } from "./BaseItem.ts";
 
 export class HealingPotion extends BaseItem implements UsableSelf {
   override name: string = "Healing Potion";
