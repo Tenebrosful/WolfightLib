@@ -1,6 +1,6 @@
 import { Player } from "../Player.ts";
 
-export const INFINITE_DURATION = -1
+export const INFINITE_DURATION = -1;
 
 export abstract class BaseEffect {
   abstract name: string;
@@ -17,22 +17,26 @@ export abstract class BaseEffect {
     this.id = crypto.randomUUID();
     this.source = source;
     this.appliedTo = appliedTo;
-    this.remainingTurn = duration ?? -1
+    this.remainingTurn = duration ?? -1;
   }
 
   /**
    * Tick the duration of the effect
-   * @returns True if the effect has ended and need to be removed
+   * @returns True if the effect has ended and has been removed
    */
   Tick(): boolean {
-    if (this.remainingTurn === -1) { return false; }
+    if (this.remainingTurn === -1) return false;
 
-    return this.remainingTurn-- <= 0;
+    const hasEnded = this.remainingTurn-- <= 0;
+
+    if (hasEnded) this.appliedTo.RemoveEffect(this);
+
+    return hasEnded;
   }
 }
 
 export type EffectTag =
-  "TriggerOnDamage" |
-  "TriggerOnTurnStart" |
-  "TriggerOnTurnEnd" |
-  "TriggerOnAttack"
+  | "TriggerOnDamage"
+  | "TriggerOnTurnStart"
+  | "TriggerOnTurnEnd"
+  | "TriggerOnAttack";

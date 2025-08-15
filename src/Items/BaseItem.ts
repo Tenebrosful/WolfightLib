@@ -13,21 +13,22 @@ export abstract class BaseItem {
   }
 
   StartCooldown() {
-    this.owner!.cooldowns.push(new CooldownTimer(this.id, this.cooldown));
+    this.owner?.AddCooldown(new CooldownTimer(this.id, this.name, this.cooldown, this.owner));
   }
 
   IsOnCooldown() {
-    return this.owner!.cooldowns.some(c => c.id === this.id);
+    return this.owner!.cooldowns.some((c) => c.id === this.id);
   }
 
   toString() {
-    return this.name
+    return this.name;
   }
 }
 
 export type ItemTag =
-  "Usable" |
-  "TriggerOnDamage" |
-  "TriggerOnGameStart" |
-  "TargetRequired" |
-  "SelfTarget"
+  | "Usable"
+  | "TriggerOnDamage"
+  | "TriggerOnGameStart"
+  | "TargetRequired"
+  | "SelfTarget"
+  | "TriggerOnAttack";

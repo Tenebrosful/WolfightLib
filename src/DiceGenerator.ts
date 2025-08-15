@@ -1,5 +1,5 @@
 import * as RandomGeneratorLib from "npm:random-seed";
-import { RandomSeed } from "npm:random-seed"
+import { RandomSeed } from "npm:random-seed";
 import { randomBytes } from "node:crypto";
 
 export class DiceGenerator {
@@ -14,7 +14,10 @@ export class DiceGenerator {
   }
 
   private GenerateDiceResult(amount: number, dice: number): number {
-    if (amount <= 0 || dice <= 0) { console.warn(`Tried to generate ${amount}d${dice}`); return 0; }
+    if (amount <= 0 || dice <= 0) {
+      console.warn(`Tried to generate ${amount}d${dice}`);
+      return 0;
+    }
     return this.randomGenerator.intBetween(amount, amount * dice);
   }
 
@@ -26,19 +29,19 @@ export class DiceGenerator {
     return this.#instance.GenerateDiceResult(amount, dice);
   }
 
-  static D4(amount: number): number {
+  static D4(amount = 1): number {
     return this.Dice(amount, 6);
   }
 
-  static D6(amount: number): number {
+  static D6(amount = 1): number {
     return this.Dice(amount, 6);
   }
 
-  static D20(amount: number): number {
+  static D20(amount = 1): number {
     return this.Dice(amount, 20);
   }
 
-  static D100(amount: number): number {
+  static D100(amount = 1): number {
     return this.Dice(amount, 100);
   }
 }

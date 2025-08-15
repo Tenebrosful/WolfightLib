@@ -1,23 +1,26 @@
 import { Player } from "./Player.ts";
 
 export interface UsableSelf {
-  Use(): void;
+  Use(args?: unknown[]): void;
 }
 
 export interface UsableTarget {
-  UseOnTarget(target: Player): void;
+  UseOnTarget(target: Player, args?: unknown[]): void;
 }
 
 export interface TriggerOnDamage {
   /**
-   * 
    * @param source Source of the damage
    * @param initialDamage Amount of damage
    * @returns Damage after calculation
    */
-  OnDamage(source: Player, initialDamage: number): number;
+  OnDamage(initialDamage: number, source?: Player): number;
 }
 
 export interface TriggerOnGameStart {
-  OnGameStart(source: Player): void;
+  OnGameStart(source: Player, args?: unknown[]): void;
+}
+
+export interface TriggerOnAttack {
+  OnAttack(source: Player, target: Player, initialDamage: number): number;
 }

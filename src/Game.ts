@@ -5,17 +5,17 @@ import { Player } from "./Player.ts";
 export class Game {
   turnNumber: number = 0;
   currentPhase: gamePhase = gamePhase.initialization;
-  players: Player[] = []
+  players: Player[] = [];
 
   constructor(seed?: string) {
     DiceGenerator.Initiate(seed);
   }
 
   GameStart() {
-    console.log(`> Game Starting`)
-    this.players.forEach(player => {
-      if (player.character.tags.includes("TriggerOnGameStart")) { (player.character as unknown as TriggerOnGameStart).OnGameStart(player); }
-      player.items.filter(item => item.tags.includes("TriggerOnGameStart")).forEach(item => (item as unknown as TriggerOnGameStart).OnGameStart(player))
+    console.log(`> Game Starting`);
+    this.players.forEach((player) => {
+      if (player.character.tags.includes("TriggerOnGameStart")) (player.character as unknown as TriggerOnGameStart).OnGameStart(player);
+      player.items.filter((item) => item.tags.includes("TriggerOnGameStart")).forEach((item) => (item as unknown as TriggerOnGameStart).OnGameStart(player));
     });
   }
 
@@ -37,16 +37,18 @@ export class Game {
     console.log(`> End of turn ${this.turnNumber}`);
 
     this.players
-      .forEach(player => player.cooldowns
-        .forEach((cooldown, index, array) => {
-          if (cooldown.Tick()) { console.log(`${cooldown.id} cooldown just ended`); array.splice(index, 1); }
-        }))
+      .forEach((player) =>
+        player.cooldowns
+          .forEach((cooldown) => {
+            cooldown.Tick();
+          })
+      );
 
     this.TurnStart();
   }
 
   toString() {
-    return `Players:\r\n- ${this.players.map(p => p.toString()).join("\r\n- ")}`;
+    return `Players:\r\n- ${this.players.map((p) => p.toString()).join("\r\n- ")}`;
   }
 }
 

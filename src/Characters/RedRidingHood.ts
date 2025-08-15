@@ -12,7 +12,7 @@ export class RedRidingHood extends BaseCharacter implements TriggerOnGameStart {
   override tags: CharacterTags[] = ["isVillager", "TriggerOnGameStart"];
 
   OnGameStart(source: Player): void {
-    console.log(`Adding ${RedRidingHoodPassive.name} to ${source.name}`)
+    console.log(`Adding ${RedRidingHoodPassive.name} to ${source.name}`);
     source.effects.push(new RedRidingHoodPassive(source, INFINITE_DURATION, source));
   }
 }
