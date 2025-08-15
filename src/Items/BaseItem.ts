@@ -37,10 +37,10 @@ export interface TriggerOnDamage {
   /**
    * 
    * @param source Source of the damage
-   * @param damage Amount of damage
+   * @param initialDamage Amount of damage
    * @returns Damage after calculation
    */
-  OnDamage(source: Player, damage: number): number;
+  OnDamage(source: Player, initialDamage: number): number;
 }
 
 export type ItemTag =

@@ -5,6 +5,7 @@ export class CooldownTimer {
   constructor(id: string, remainingTurn: number) {
     this.id = id;
     this.remainingTurn = remainingTurn;
+    console.log(`${id} is now in cooldown for ${remainingTurn} turns`);
   }
 
   /**

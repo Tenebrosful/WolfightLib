@@ -6,23 +6,17 @@ import { Player } from "./src/Player.ts";
 
 const game = new Game();
 
-game.players.push(new Player(new Villager(), [new WarRobe(), new HealingPotion(), new WarRobe()]));
-game.players.push(new Player(new Villager(), [new WarRobe(), new HealingPotion(), new WarRobe()]));
+game.players.push(new Player(new Villager(), [new WarRobe(), new HealingPotion(), new WarRobe()], "Player 1"));
+game.players.push(new Player(new Villager(), [new WarRobe(), new HealingPotion(), new WarRobe()], "Player 2"));
 
-console.log(game.toString());
+game.TurnStart();
 
 (game.players[0].items[1] as unknown as UsableSelf).Use();
 
-console.log(game.toString())
+game.TurnEnd()
+
+game.players[0].Damage(game.players[1], 10);
 
 game.TurnEnd()
 
-console.log(game.toString())
-
 game.TurnEnd()
-
-console.log(game.toString())
-
-game.TurnEnd()
-
-console.log(game.toString())

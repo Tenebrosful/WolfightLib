@@ -14,8 +14,12 @@ export class WarRobe extends BaseItem implements TriggerOnDamage {
     this.damageReduction = DiceGenerator.D6(1);
   }
 
-  OnDamage(_source: Player, damage: number): number {
-    return Math.max(0, damage - this.damageReduction);
+  OnDamage(_source: Player, initialDamage: number): number {
+    const finalDamage = Math.max(0, initialDamage - this.damageReduction);
+
+    console.log(`${this.name} reduced damage from ${initialDamage} to ${finalDamage} (${initialDamage - finalDamage})`);
+
+    return finalDamage;
   }
 
   override toString(): string {

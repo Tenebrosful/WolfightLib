@@ -7,7 +7,11 @@ export class HealingPotion extends BaseItem implements UsableSelf {
   override tags: ItemTag[] = ["Usable", "SelfTarget"];
 
   Use(): void {
-    this.owner!.Heal(DiceGenerator.D6(1));
+    const healRoll = DiceGenerator.D6(1);
+
+    console.log(`${this.owner?.name} used ${this.name} to heal ${healRoll} health`);
+
+    this.owner!.Heal(healRoll);
     this.StartCooldown();
   }
 }

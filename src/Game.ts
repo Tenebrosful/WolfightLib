@@ -3,19 +3,37 @@ import { Player } from "./Player.ts";
 
 export class Game {
   turnNumber: number = 0;
+  currentPhase: gamePhase = gamePhase.initialization;
   players: Player[] = []
 
   constructor(seed?: string) {
     DiceGenerator.Initiate(seed);
   }
 
+  TurnStart() {
+    this.currentPhase = gamePhase.turnStart;
+    this.turnNumber++;
+    console.log(`Start of turn ${this.turnNumber}`);
+
+    this.DuringTurn();
+  }
+
+  DuringTurn() {
+    this.currentPhase = gamePhase.ingoing;
+    console.log(`Player phase turn`);
+  }
+
   TurnEnd() {
+    this.currentPhase = gamePhase.turnEnd;
+    console.log(`End of turn ${this.turnNumber}`);
+
     this.players
       .forEach(player => player.cooldowns
         .forEach((cooldown, index, array) => {
-          if (cooldown.Tick()) { array.splice(index, 1); }
+          if (cooldown.Tick()) { console.log(`${cooldown.id} cooldown just ended`); array.splice(index, 1); }
         }))
-    this.turnNumber++;
+
+    this.TurnStart();
   }
 
   toString() {
@@ -24,6 +42,7 @@ export class Game {
 }
 
 export enum gamePhase {
+  initialization,
   gameStart,
   turnStart,
   ingoing,
